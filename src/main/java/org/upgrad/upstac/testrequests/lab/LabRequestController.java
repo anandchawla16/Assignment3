@@ -48,17 +48,10 @@ public class LabRequestController {
     private UserLoggedInService userLoggedInService;
 
 
-
     @GetMapping("/to-be-tested")
     @PreAuthorize("hasAnyRole('TESTER')")
     public List<TestRequest> getForTests()  {
-
-
        return testRequestQueryService.findBy(RequestStatus.INITIATED);
-
-
-
-
     }
 
     @GetMapping
@@ -76,19 +69,13 @@ public class LabRequestController {
         User user = userLoggedInService.getLoggedInUser();
         return testRequestQueryService.findByTester(user);
 
-
     }
-
 
     @PreAuthorize("hasAnyRole('TESTER')")
     @PutMapping("/assign/{id}")
     public TestRequest assignForLabTest(@PathVariable Long id) {
-
-
-
         User tester =userLoggedInService.getLoggedInUser();
-
-      return   testRequestUpdateService.assignForLabTest(id,tester);
+        return   testRequestUpdateService.assignForLabTest(id,tester);
     }
 
     @PreAuthorize("hasAnyRole('TESTER')")
@@ -107,9 +94,4 @@ public class LabRequestController {
             throw asBadRequest(e.getMessage());
         }
     }
-
-
-
-
-
 }

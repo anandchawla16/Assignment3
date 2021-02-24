@@ -51,20 +51,13 @@ public class ConsultationController {
     @GetMapping("/in-queue")
     @PreAuthorize("hasAnyRole('DOCTOR')")
     public List<TestRequest> getForConsultations()  {
-
         // Implement this method
-
-
         //Implement this method to get the list of test requests having status as 'LAB_TEST_COMPLETED'
         // make use of the findBy() method from testRequestQueryService class
         //return the result
         // For reference check the method getForTests() method from LabRequestController class
-
-
         // the following statement gets all test results with status as  LAB_TEST_COMPLETED
         return testRequestQueryService.findBy(RequestStatus.LAB_TEST_COMPLETED);
-
-
     }
 
     @GetMapping
@@ -81,9 +74,7 @@ public class ConsultationController {
          // following piece of code returns list of results test assigned to current logged in doctor
          User user = userLoggedInService.getLoggedInUser();
          return testRequestQueryService.findByDoctor(user);
-
-
-    }
+   }
 
 
 
@@ -101,13 +92,11 @@ public class ConsultationController {
 
         // following code assigns the current test request to doctor logged in
         try {
-
             User user = userLoggedInService.getLoggedInUser();
             return testRequestUpdateService.assignForConsultation(id, user);
         }
             catch (ConstraintViolationException e) {
                 throw asConstraintViolation(e);
-
         } catch (AppException e) {
             throw asBadRequest(e.getMessage());
         }
@@ -138,7 +127,4 @@ public class ConsultationController {
             throw asBadRequest(e.getMessage());
         }
     }
-
-
-
 }
